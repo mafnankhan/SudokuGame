@@ -13,11 +13,15 @@ const SudokoBoard:React.FC = () => {
 
     const onChange = (e: SyntheticEvent | any) => {
         e.preventDefault()
+        const [boardRow, boardCol] = [e.target.attributes.getNamedItem("board-row").value, e.target.attributes.getNamedItem("board-col").value];
         if (e.target.value !== "") {
-            const [boardRow, boardCol] = [e.target.attributes.getNamedItem("board-row").value, e.target.attributes.getNamedItem("board-col").value];
-
             let updatedMap = screen2DMap
             updatedMap[boardRow][boardCol] = parseInt(e.target.value)
+            setScree2DMap(updatedMap)
+            forceUpdate()
+        } else {
+            let updatedMap = screen2DMap
+            updatedMap[boardRow][boardCol] = 0
             setScree2DMap(updatedMap)
             forceUpdate()
         }
